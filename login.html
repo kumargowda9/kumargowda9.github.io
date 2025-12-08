@@ -1,0 +1,39 @@
+
+
+<!-- FILE: login.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Login — Legiora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container center">
+    <h1>Admin Login</h1>
+    <form id="loginForm" class="card form-card">
+      <label>Username<input id="u" required></label>
+      <label>Password<input id="p" type="password" required></label>
+      <div style="display:flex;gap:10px;">
+        <button class="btn primary" type="submit">Login</button>
+        <a href="index.html" class="btn">Back</a>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const u=document.getElementById('u').value.trim();
+      const p=document.getElementById('p').value;
+      // Simple client-side auth demo. Change credentials before production.
+      if (u==='admin' && p==='legiora123') {
+        location.href='admin.html';
+      } else {
+        alert('Invalid credentials. Use admin / legiora123');
+      }
+    });
+  </script>
+</body>
+</html>

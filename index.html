@@ -1,0 +1,41 @@
+
+<!-- FILE: index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Legiora — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">Legiora</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="admin.html">Admin</a>
+        <a href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Premium Products — Red • Black • White</h1>
+      <p>Fast, simple static store. Click any product for details.</p>
+    </section>
+
+    <section>
+      <div id="productsGrid" class="products-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> Legiora — Made with ❤️</div>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

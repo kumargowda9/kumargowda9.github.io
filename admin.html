@@ -1,0 +1,81 @@
+
+<!-- FILE: admin.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Legiora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">Legiora</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart (<span id="cartCountAdmin">0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Admin — Add Product</h1>
+    <form id="addProductForm" class="card form-card">
+      <label>Product Name<input id="prodName" required></label>
+      <label>Price (INR)<input id="prodPrice" type="number" min="1" required></label>
+      <label>Image URL<input id="prodImg" required></label>
+      <label>Category<input id="prodCat"></label>
+      <label>Description<textarea id="prodDesc"></textarea></label>
+      <div style="display:flex;gap:10px;">
+        <button class="btn primary" type="submit">Add Product</button>
+        <button id="clearCustom" class="btn" type="button">Clear Custom Products</button>
+      </div>
+    </form>
+
+    <h2>Current Products</h2>
+    <div id="adminProducts" class="products-grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="year4"></span> Legiora</div>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Only minimal client-side admin. Products persisted to localStorage under 'customProducts'.
+    const adminList=document.getElementById('adminProducts');
+    function refreshAdmin() {
+      adminList.innerHTML='';
+      getAllProducts().forEach(p=>{
+        const el=document.createElement('div'); el.className='card admin-card';
+        el.innerHTML=`<img src="${p.img}"><div class="card-content"><h4>${p.name}</h4><div class="price">₹${p.price}</div></div>`;
+        adminList.appendChild(el);
+      });
+      updateCartCountUi('cartCountAdmin');
+    }
+    document.getElementById('addProductForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const p={
+        id: 'c'+Date.now(),
+        name:document.getElementById('prodName').value.trim(),
+        price:parseInt(document.getElementById('prodPrice').value,10)||0,
+        img:document.getElementById('prodImg').value.trim(),
+        category:document.getElementById('prodCat').value.trim(),
+        description:document.getElementById('prodDesc').value.trim()
+      };
+      saveCustomProduct(p);
+      e.target.reset();
+      refreshAdmin();
+      alert('Product added (local only).');
+    });
+    document.getElementById('clearCustom').addEventListener('click', ()=>{
+      if (confirm('Clear all custom products stored in this browser?')) {
+        clearCustomProducts(); refreshAdmin();
+      }
+    });
+    refreshAdmin();
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+
+<!-- FILE: payment.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout — Legiora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container center">
+    <h1>Checkout / Payment</h1>
+    <p>This is a placeholder page. For production integrate a payment gateway (Razorpay, PayPal, etc.).</p>
+    <p>For testing you can simulate payment success and then clear cart.</p>
+    <div style="display:flex;gap:10px;">
+      <button id="simulate" class="btn primary">Simulate Payment Success</button>
+      <a class="btn" href="cart.html">Back to Cart</a>
+    </div>
+  </main>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('simulate').addEventListener('click', ()=>{
+      // Simulate order placed
+      localStorage.removeItem('cart');
+      alert('Payment simulated. Cart cleared.');
+      location.href='index.html';
+    });
+  </script>
+</body>
+</html>
